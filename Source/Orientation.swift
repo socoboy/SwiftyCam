@@ -22,6 +22,7 @@ import CoreMotion
 class Orientation  {
     
     var shouldUseDeviceOrientation: Bool  = false
+    var fixedLandscape: Bool = false
     
     fileprivate var deviceOrientation : UIDeviceOrientation?
     fileprivate let coreMotionManager = CMMotionManager()
@@ -46,6 +47,18 @@ class Orientation  {
     }
     
     func getImageOrientation(forCamera: SwiftyCamViewController.CameraSelection) -> UIImageOrientation {
+        if fixedLandscape {
+            let currentOrientation = UIDevice.current.orientation
+            switch currentOrientation {
+            case .landscapeLeft, .portraitUpsideDown:
+                return forCamera == .rear ? .up : .downMirrored
+            case .landscapeRight, .portrait:
+                return forCamera == .rear ? .down : .upMirrored
+            default:
+                return forCamera == .rear ? .up : .downMirrored
+            }
+        }
+        
         guard shouldUseDeviceOrientation, let deviceOrientation = self.deviceOrientation else { return forCamera == .rear ? .right : .leftMirrored }
         
         switch deviceOrientation {
@@ -75,6 +88,18 @@ class Orientation  {
     }
     
     func getVideoOrientation() -> AVCaptureVideoOrientation? {
+        if fixedLandscape {
+            let currentOrientation = UIDevice.current.orientation
+            switch currentOrientation {
+            case .landscapeLeft, .portraitUpsideDown:
+                return .landscapeRight
+            case .landscapeRight, .portrait:
+                return .landscapeLeft
+            default:
+                return .landscapeRight
+            }
+        }
+        
         guard shouldUseDeviceOrientation, let deviceOrientation = self.deviceOrientation else { return nil }
         
         switch deviceOrientation {

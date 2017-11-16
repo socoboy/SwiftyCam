@@ -150,6 +150,12 @@ open class SwiftyCamViewController: UIViewController {
             orientation.shouldUseDeviceOrientation = shouldUseDeviceOrientation
         }
     }
+    
+    public var fixedLandscape = false {
+        didSet {
+            orientation.fixedLandscape = fixedLandscape
+        }
+    }
 
     /// Sets whether or not View Controller supports auto rotation
 
