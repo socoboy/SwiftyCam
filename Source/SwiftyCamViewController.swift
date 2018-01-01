@@ -339,11 +339,11 @@ open class SwiftyCamViewController: UIViewController {
 
                     break
 
-                case .landscapeRight: updatePreviewLayer(layer: previewLayerConnection, orientation: .landscapeLeft)
+                case .landscapeRight: updatePreviewLayer(layer: previewLayerConnection, orientation: .landscapeRight)
 
                     break
 
-                case .landscapeLeft: updatePreviewLayer(layer: previewLayerConnection, orientation: .landscapeRight)
+                case .landscapeLeft: updatePreviewLayer(layer: previewLayerConnection, orientation: .landscapeLeft)
 
                     break
 

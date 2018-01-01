@@ -40,7 +40,7 @@ class Orientation  {
             self?.handleAccelerometerUpdate(data: data)
         }
     }
-  
+    
     func stop() {
         self.coreMotionManager.stopAccelerometerUpdates()
         self.deviceOrientation = nil
@@ -51,9 +51,9 @@ class Orientation  {
             let currentOrientation = UIDevice.current.orientation
             switch currentOrientation {
             case .landscapeLeft, .portraitUpsideDown:
-                return forCamera == .rear ? .up : .downMirrored
-            case .landscapeRight, .portrait:
                 return forCamera == .rear ? .down : .upMirrored
+            case .landscapeRight, .portrait:
+                return forCamera == .rear ? .up : .downMirrored
             default:
                 return forCamera == .rear ? .up : .downMirrored
             }
